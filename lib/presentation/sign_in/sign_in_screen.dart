@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Center(
                   child: Container(
-                    color: const Color(0xFFF1F9FA),
+                    color: Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Text(
