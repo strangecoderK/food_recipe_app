@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/data/repository/recipe_repository.dart';
 import 'package:food_recipe_app/presentation/home/saved_recipe_view.dart';
-import 'package:food_recipe_app/ui/text_styles.dart';
 
 class HomeScreen extends StatefulWidget {
   final RecipeRepository repository;
@@ -42,14 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Saved recipes',
-            style: TextStyles.mediumTextBold,
-          ),
-        ),
-      ),
       body: [
         const Center(child: Text('Home')),
         SavedRecipeView(
@@ -60,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.white,
-       height: 58,
+        height: 58,
         overlayColor: WidgetStateProperty.all(Colors.transparent),
         destinations: destination,
         labelBehavior: labelBehavior,
