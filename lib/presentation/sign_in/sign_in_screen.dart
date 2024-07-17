@@ -4,6 +4,7 @@ import 'package:food_recipe_app/presentation/component/icon_box.dart';
 import 'package:food_recipe_app/presentation/component/input_field.dart';
 import 'package:food_recipe_app/ui/color_styles.dart';
 import 'package:food_recipe_app/ui/text_styles.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -69,7 +70,9 @@ class _SignInScreenState extends State<SignInScreen> {
           const SizedBox(
             height: 15,
           ),
-          const BigButton(text: 'Sign in'),
+          const BigButton(
+            text: 'Sign In',
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Stack(
@@ -113,7 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     .copyWith(fontWeight: FontWeight.w500),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () => context.go('/sign_up'),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
