@@ -3,25 +3,25 @@ import 'package:food_recipe_app/ui/color_styles.dart';
 import 'package:food_recipe_app/ui/text_styles.dart';
 import 'package:go_router/go_router.dart';
 
-class BigButton extends StatefulWidget {
+class MediumButton extends StatefulWidget {
   final String text;
   final String? path;
 
-  const BigButton({super.key, required this.text, this.path});
+  const MediumButton({super.key, required this.text, this.path});
 
   @override
-  State<BigButton> createState() => _BigButtonState();
+  State<MediumButton> createState() => _MediumButtonState();
 }
 
-class _BigButtonState extends State<BigButton> {
+class _MediumButtonState extends State<MediumButton> {
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(
-          left: 30,
-          right: 30,
+          left: 66,
+          right: 66,
           top: 10,
           bottom: 10,
         ),
