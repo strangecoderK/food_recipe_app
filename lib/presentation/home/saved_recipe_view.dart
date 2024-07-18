@@ -38,11 +38,8 @@ class SavedRecipeView extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       children: result.data
                           .map(
-                            (e) => Hero(
-                              tag: 'picture${e.name}',
-                              child: RecipeCard(
-                                recipe: e,
-                              ),
+                            (e) => RecipeCard(
+                              recipe: e,
                             ),
                           )
                           .toList(),

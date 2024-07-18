@@ -16,7 +16,7 @@ class RecipePicture extends StatelessWidget {
     return Column(
       children: [
         Hero(
-          tag: 'picture${recipe.name}',
+          tag: recipe.name,
           child: Stack(
             children: [
               Padding(

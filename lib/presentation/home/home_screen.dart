@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 1;
+  late final List<Widget> _screen;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysHide;
 
@@ -39,16 +40,22 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    _screen = [
+      const Center(child: Text('Home')),
+      SavedRecipeView(
+        repository: widget.repository,
+      ),
+      const Center(child: Text('Notifications')),
+      const Center(child: Text('Profile')),
+    ];
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: [
-        const Center(child: Text('Home')),
-        SavedRecipeView(
-          repository: widget.repository,
-        ),
-        const Center(child: Text('Notifications')),
-        const Center(child: Text('Profile')),
-      ][currentPageIndex],
+      body: _screen[currentPageIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.white,
         height: 58,
