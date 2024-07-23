@@ -6,13 +6,14 @@ import '../../ui/text_styles.dart';
 class InputField extends StatelessWidget {
   final String title;
   final String hintText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  const InputField(
-      {super.key,
-      required this.title,
-      required this.hintText,
-      required this.controller});
+  const InputField({
+    super.key,
+    required this.title,
+    required this.hintText,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
