@@ -14,10 +14,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passWordController = TextEditingController();
-  final confirmPassWordController = TextEditingController();
   bool _isChecked = false;
 
   @override
@@ -49,22 +45,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   .copyWith(fontWeight: FontWeight.w400),
             ),
           ),
-          InputField(
-              title: 'Name',
-              hintText: 'Enter Name',
-              controller: nameController),
-          InputField(
-              title: 'Email',
-              hintText: 'Enter Email',
-              controller: emailController),
-          InputField(
-              title: 'Password',
-              hintText: 'Enter Password',
-              controller: passWordController),
-          InputField(
-              title: 'Confirm Password',
-              hintText: 'Retype Password',
-              controller: confirmPassWordController),
+          const InputField(
+            title: 'Name',
+            hintText: 'Enter Name',
+          ),
+          const InputField(
+            title: 'Email',
+            hintText: 'Enter Email',
+          ),
+          const InputField(
+            title: 'Password',
+            hintText: 'Enter Password',
+          ),
+          const InputField(
+            title: 'Confirm Password',
+            hintText: 'Retype Password',
+          ),
           Row(
             children: [
               Padding(
@@ -93,7 +89,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ],
           ),
-          const BigButton(text: 'Sign Up', path: '/home_screen',),
+          const BigButton(
+            text: 'Sign Up',
+            path: '/main_screen',
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Stack(
