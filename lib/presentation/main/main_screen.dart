@@ -60,7 +60,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     _screen = [
-      HomeScreen(HomeViewModel(user)),
+      ChangeNotifierProvider<HomeViewModel>(
+          value: HomeViewModel(user), child: const HomeScreen()),
       ChangeNotifierProvider<SavedRecipeViewModel>(
           value: SavedRecipeViewModel(SavedRecipeRepositoryImpl(
               recipeDataSource: MockSavedRecipeDataSource())),

@@ -7,10 +7,10 @@ import 'package:food_recipe_app/ui/text_styles.dart';
 class SavedRecipeScreen extends StatelessWidget {
   const SavedRecipeScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    final viewModel = ChangeNotifierProvider.of<SavedRecipeViewModel>(context).value;
+    final viewModel =
+        ChangeNotifierProvider.of<SavedRecipeViewModel>(context).value;
     return Column(
       children: [
         Center(
@@ -28,15 +28,15 @@ class SavedRecipeScreen extends StatelessWidget {
             final recipes = viewModel.recipes;
             return viewModel.isLoading
                 ? const Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children:
-                recipes.map((e) => RecipeCard(recipe: e)).toList(),
-              ),
-            );
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children:
+                          recipes.map((e) => RecipeCard(recipe: e)).toList(),
+                    ),
+                  );
           },
         ),
       ],

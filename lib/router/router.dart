@@ -1,3 +1,4 @@
+import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/data/data_source/recipe/mock_recipe_data_source.dart';
 import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
 import 'package:food_recipe_app/data/model/recipe.dart';
@@ -50,10 +51,11 @@ final router = GoRouter(
     GoRoute(
       path: '/search_screen',
       builder: (context, state) {
-        return SearchScreen(
-            viewModel: SearchViewModel(
+        return ChangeNotifierProvider<SearchViewModel>(
+            value: SearchViewModel(
                 repository: RecipeRepositoryImpl(
-                    recipeDataSource: MockRecipeDataSource())));
+                    recipeDataSource: MockRecipeDataSource())),
+            child: const SearchScreen());
       },
     ),
   ],
