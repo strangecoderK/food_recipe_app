@@ -41,6 +41,15 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 10,
         ),
+        RecipeIngredient(
+          ingredient: Ingredient(
+            id: 1,
+            name: 'Tomato',
+            image:
+                'https://cdn.pixabay.com/photo/2017/10/06/17/17/tomato-2823826_1280.jpg',
+          ),
+          amount: 100,
+        ),
       ],
     ),
     const Recipe(

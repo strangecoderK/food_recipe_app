@@ -40,6 +40,14 @@ class MockRecipeDataSource implements RecipeDataSource {
                 'https://cdn.pixabay.com/photo/2016/03/05/22/31/pepper-1239308_1280.jpg',
           ),
           amount: 10,
+        ),  RecipeIngredient(
+          ingredient: Ingredient(
+            id: 1,
+            name: 'Tomato',
+            image:
+            'https://cdn.pixabay.com/photo/2017/10/06/17/17/tomato-2823826_1280.jpg',
+          ),
+          amount: 100,
         ),
       ],
     ),
@@ -78,6 +86,14 @@ class MockRecipeDataSource implements RecipeDataSource {
                 'https://cdn.pixabay.com/photo/2016/03/05/22/31/pepper-1239308_1280.jpg',
           ),
           amount: 5,
+        ),  RecipeIngredient(
+          ingredient: Ingredient(
+            id: 3,
+            name: 'Pork',
+            image:
+            'https://cdn.pixabay.com/photo/2019/12/20/14/44/meat-4708596_1280.jpg',
+          ),
+          amount: 500,
         ),
       ],
     ),
