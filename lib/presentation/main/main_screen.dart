@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
 
 import 'package:food_recipe_app/data/model/user.dart';
@@ -22,7 +23,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int currentPageIndex = 1;
+  int currentPageIndex = 0;
   late final List<Widget> _screen;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysHide;
@@ -60,13 +61,10 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     _screen = [
       HomeScreen(HomeViewModel(user)),
-      SavedRecipeScreen(
-        SavedRecipeViewModel(
-          SavedRecipeRepositoryImpl(
-            recipeDataSource: MockSavedRecipeDataSource(),
-          ),
-        ),
-      ),
+      ChangeNotifierProvider<SavedRecipeViewModel>(
+          value: SavedRecipeViewModel(SavedRecipeRepositoryImpl(
+              recipeDataSource: MockSavedRecipeDataSource())),
+          child: const SavedRecipeScreen()),
       const NotificationScreen(),
       const ProfileScreen(),
     ];
