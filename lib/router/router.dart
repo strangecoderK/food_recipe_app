@@ -1,4 +1,3 @@
-import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/data/data_source/ingredient/mock_ingredient_data_source.dart';
 import 'package:food_recipe_app/data/data_source/procedure/mock_procedure_data_source.dart';
 import 'package:food_recipe_app/data/data_source/profile/mock_profile_data_source.dart';
@@ -11,7 +10,7 @@ import 'package:food_recipe_app/data/repository/profile/profile_repository_impl.
 import 'package:food_recipe_app/data/repository/recipe/recipe_repository_impl.dart';
 import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository_impl.dart';
 import 'package:food_recipe_app/presentation/main/main_screen.dart';
-
+import 'package:provider/provider.dart';
 import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
 import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_view_model.dart';
 import 'package:food_recipe_app/presentation/search/search_screen.dart';
@@ -45,7 +44,7 @@ final router = GoRouter(
       builder: (context, state) {
         final recipe = state.extra as Recipe;
         return ChangeNotifierProvider<RecipeIngredientViewModel>(
-            value: RecipeIngredientViewModel(recipe,
+            create:(context)=> RecipeIngredientViewModel(recipe,
                 profileRepository:
                     ProfileRepositoryImpl(dataSource: MockProfileDataSource()),
                 recipeRepository: RecipeRepositoryImpl(
@@ -67,7 +66,7 @@ final router = GoRouter(
       path: '/search_screen',
       builder: (context, state) {
         return ChangeNotifierProvider<SearchViewModel>(
-            value: SearchViewModel(
+            create:(context)=> SearchViewModel(
                 repository: RecipeRepositoryImpl(
                     recipeDataSource: MockRecipeDataSource())),
             child: const SearchScreen());

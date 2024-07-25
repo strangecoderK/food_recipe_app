@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/presentation/component/small_box.dart';
 import 'package:food_recipe_app/presentation/main/home/home_view_model.dart';
 import 'package:food_recipe_app/presentation/search/component/text_field_for_move.dart';
 import 'package:food_recipe_app/ui/color_styles.dart';
 import 'package:food_recipe_app/ui/text_styles.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = ChangeNotifierProvider.of<HomeViewModel>(context).value;
+    final viewModel = context.watch<HomeViewModel>();
     return Column(
       children: [
         Padding(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
 
 import 'package:food_recipe_app/data/model/user.dart';
@@ -12,6 +11,7 @@ import 'package:food_recipe_app/presentation/main/notification/notification_scre
 import 'package:food_recipe_app/presentation/main/profile/profile_screen.dart';
 import 'package:food_recipe_app/presentation/main/saved_recipe/saved_recipe_screen.dart';
 import 'package:food_recipe_app/presentation/main/saved_recipe/saved_recipe_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   final SavedRecipeRepository repository;
@@ -61,9 +61,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     _screen = [
       ChangeNotifierProvider<HomeViewModel>(
-          value: HomeViewModel(user), child: const HomeScreen()),
+          create: (context) => HomeViewModel(user), child: const HomeScreen()),
       ChangeNotifierProvider<SavedRecipeViewModel>(
-          value: SavedRecipeViewModel(SavedRecipeRepositoryImpl(
+          create: (context) => SavedRecipeViewModel(SavedRecipeRepositoryImpl(
               recipeDataSource: MockSavedRecipeDataSource())),
           child: const SavedRecipeScreen()),
       const NotificationScreen(),

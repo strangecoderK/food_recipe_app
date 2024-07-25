@@ -33,14 +33,14 @@ class RecipeIngredientViewModel with ChangeNotifier {
 
   List<Procedure> _procedureList = [];
 
-  Profile chef = const Profile(
+  Profile _chef = const Profile(
     id: 0,
     name: 'name',
     image:
         'https://cdn.pixabay.com/photo/2018/11/03/15/51/here-3792307_1280.png',
     address: 'address',
   );
-  Set<Profile> followingSet = {};
+  Set<Profile> _followingSet = {};
   int _currentTabIndex = 0;
   late String _currentTabText = '${recipe.ingredients.length} items';
 
@@ -49,6 +49,10 @@ class RecipeIngredientViewModel with ChangeNotifier {
   int get currentTabIndex => _currentTabIndex;
 
   String get currentTabText => _currentTabText;
+
+  Profile get chef => _chef;
+
+  Set<Profile> get followingSet => _followingSet;
 
   void updateTab(int index) {
     _currentTabIndex = index;
@@ -74,7 +78,7 @@ class RecipeIngredientViewModel with ChangeNotifier {
     final result = await profileRepository.getProfiles();
     switch (result) {
       case Success<List<Profile>>():
-        chef = result.data.firstWhere((e) => e.name == name);
+        _chef = result.data.firstWhere((e) => e.name == name);
         notifyListeners();
       case Error<List<Profile>>():
     }

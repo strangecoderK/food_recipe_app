@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/core/change_notifier_provider.dart';
 import 'package:food_recipe_app/data/model/recipe.dart';
 import 'package:food_recipe_app/presentation/component/chef_profile.dart';
 import 'package:food_recipe_app/presentation/component/recipe_picture.dart';
@@ -9,6 +8,7 @@ import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient
 import 'package:food_recipe_app/ui/color_styles.dart';
 import 'package:food_recipe_app/ui/text_styles.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class RecipeIngredientScreen extends StatefulWidget {
   final Recipe recipe;
@@ -32,22 +32,21 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
 
   void _handleTabSelection() {
     if (_tabController.indexIsChanging) {
-      final viewModel =
-          ChangeNotifierProvider.of<RecipeIngredientViewModel>(context).value;
+      final viewModel = context.read<RecipeIngredientViewModel>();
       viewModel.updateTab(_tabController.index);
     }
   }
 
   @override
   void dispose() {
+    _tabController.removeListener(_handleTabSelection);
     _tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel =
-        ChangeNotifierProvider.of<RecipeIngredientViewModel>(context).value;
+    final viewModel = context.watch<RecipeIngredientViewModel>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -76,17 +75,12 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
               ),
             ),
             RecipePicture(recipe: widget.recipe),
-            ListenableBuilder(
-              listenable: viewModel,
-              builder: (BuildContext context, Widget? child) {
-                return ChefProfile(
-                  profile: viewModel.chef,
-                  onTap: (profile) {
-                    viewModel.changeFollow(profile);
-                  },
-                  isFollowing: viewModel.followingSet.contains(viewModel.chef),
-                );
+            ChefProfile(
+              profile: viewModel.chef,
+              onTap: (profile) {
+                viewModel.changeFollow(profile);
               },
+              isFollowing: viewModel.followingSet.contains(viewModel.chef),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -132,14 +126,11 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
                         .copyWith(color: ColorStyles.gray3),
                   ),
                   const Spacer(),
-                  ListenableBuilder(
-                    listenable: viewModel,
-                    builder: (context, _) => Text(
-                      viewModel.currentTabText,
-                      style: TextStyles.smallerTextRegular
-                          .copyWith(color: ColorStyles.gray3),
-                    ),
-                  )
+                  Text(
+                    viewModel.currentTabText,
+                    style: TextStyles.smallerTextRegular
+                        .copyWith(color: ColorStyles.gray3),
+                  ),
                 ],
               ),
             ),
@@ -152,15 +143,11 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
                       children: widget.recipe.ingredients
                           .map((e) => IngredientCard(recipeIngredient: e))
                           .toList()),
-                  ListenableBuilder(
-                      listenable: viewModel,
-                      builder: (BuildContext context, Widget? child) {
-                        return ListView(
-                            padding: EdgeInsets.zero,
-                            children: viewModel.procedureList
-                                .map((e) => ProcedureCard(procedure: e))
-                                .toList());
-                      })
+                  ListView(
+                      padding: EdgeInsets.zero,
+                      children: viewModel.procedureList
+                          .map((e) => ProcedureCard(procedure: e))
+                          .toList())
                 ],
               ),
             )
