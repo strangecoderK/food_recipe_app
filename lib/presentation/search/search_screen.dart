@@ -11,10 +11,11 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SearchViewModel>();
+    final state = viewModel.state;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Search recipes',
           style: TextStyles.mediumTextBold,
         ),
@@ -26,14 +27,14 @@ class SearchScreen extends StatelessWidget {
             hintText: 'Search recipe',
             function: viewModel.search,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, top: 10.0, bottom: 20.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 30.0, top: 10.0, bottom: 20.0),
             child: Text(
               'Recent search',
               style: TextStyles.normalTextBold,
             ),
           ),
-          viewModel.isLoading
+          state.isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -46,9 +47,9 @@ class SearchScreen extends StatelessWidget {
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 15,
                                 crossAxisSpacing: 15),
-                        itemCount: viewModel.recipes.length,
+                        itemCount: state.recipes.length,
                         itemBuilder: (context, index) {
-                          return SearchImage(recipe: viewModel.recipes[index]);
+                          return SearchImage(recipe: state.recipes[index]);
                         }),
                   ),
                 ),

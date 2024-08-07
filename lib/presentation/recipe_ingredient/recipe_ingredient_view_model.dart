@@ -8,6 +8,7 @@ import 'package:food_recipe_app/data/repository/ingredient/ingredient_repository
 import 'package:food_recipe_app/data/repository/procedure/procedure_repository.dart';
 import 'package:food_recipe_app/data/repository/profile/profile_repository.dart';
 import 'package:food_recipe_app/data/repository/recipe/recipe_repository.dart';
+import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_state.dart';
 
 class RecipeIngredientViewModel with ChangeNotifier {
   final Recipe recipe;
@@ -26,39 +27,30 @@ class RecipeIngredientViewModel with ChangeNotifier {
     _initProfile();
   }
 
+  RecipeIngredientState _state = const RecipeIngredientState();
+
+  RecipeIngredientState get state => _state;
+
   Future<void> _initProfile() async {
     await getProfile(recipe.chef);
     await getProcedures(recipe.id);
   }
 
-  List<Procedure> _procedureList = [];
-
-  Profile _chef = const Profile(
-    id: 0,
-    name: 'name',
-    image:
-        'https://cdn.pixabay.com/photo/2018/11/03/15/51/here-3792307_1280.png',
-    address: 'address',
-  );
+  //추후 다른 방식으로 state에 분리해야 될 것으로 보임
   Set<Profile> _followingSet = {};
-  int _currentTabIndex = 0;
-  late String _currentTabText = '${recipe.ingredients.length} items';
 
-  List<Procedure> get procedureList => _procedureList;
+  int _currentTabIndex = 0;
 
   int get currentTabIndex => _currentTabIndex;
 
-  String get currentTabText => _currentTabText;
-
-  Profile get chef => _chef;
+  String get currentTabText => _currentTabIndex == 0
+      ? '${recipe.ingredients.length} items'
+      : '${state.procedureList.length} steps';
 
   Set<Profile> get followingSet => _followingSet;
 
   void updateTab(int index) {
     _currentTabIndex = index;
-    _currentTabText = index == 0
-        ? '${recipe.ingredients.length} items'
-        : '${procedureList.length} steps';
     notifyListeners();
   }
 
@@ -66,9 +58,10 @@ class RecipeIngredientViewModel with ChangeNotifier {
     final result = await procedureRepository.getProcedures();
     switch (result) {
       case Success<List<Procedure>>():
-        _procedureList = result.data
-            .where((e) => e.recipeId == recipeId)
-            .sorted((a, b) => a.step.compareTo(b.step));
+        _state = state.copyWith(
+            procedureList: result.data
+                .where((e) => e.recipeId == recipeId)
+                .sorted((a, b) => a.step.compareTo(b.step)));
         notifyListeners();
       case Error<List<Procedure>>():
     }
@@ -78,7 +71,8 @@ class RecipeIngredientViewModel with ChangeNotifier {
     final result = await profileRepository.getProfiles();
     switch (result) {
       case Success<List<Profile>>():
-        _chef = result.data.firstWhere((e) => e.name == name);
+        _state =
+            state.copyWith(chef: result.data.firstWhere((e) => e.name == name));
         notifyListeners();
       case Error<List<Profile>>():
     }

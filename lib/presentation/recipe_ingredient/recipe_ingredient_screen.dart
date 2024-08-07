@@ -47,6 +47,7 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<RecipeIngredientViewModel>();
+    final state = viewModel.state;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -75,26 +76,29 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
               ),
             ),
             RecipePicture(recipe: widget.recipe),
-            ChefProfile(
-              profile: viewModel.chef,
-              onTap: (profile) {
-                viewModel.changeFollow(profile);
-              },
-              isFollowing: viewModel.followingSet.contains(viewModel.chef),
-            ),
+            if (state.chef != null)
+              ChefProfile(
+                profile: state.chef!,
+                onTap: (profile) {
+                  viewModel.changeFollow(profile);
+                },
+                isFollowing: viewModel.followingSet.contains(state.chef),
+              )
+            else
+              const CircularProgressIndicator(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TabBar(
                 controller: _tabController,
-                tabs: [
+                tabs: const [
                   Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                         top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
                     child:
                         Text('Ingredient', style: TextStyles.smallerTextBold),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                         top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
                     child: Text('Procedure', style: TextStyles.smallerTextBold),
                   ),
@@ -145,7 +149,7 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
                           .toList()),
                   ListView(
                       padding: EdgeInsets.zero,
-                      children: viewModel.procedureList
+                      children: state.procedureList
                           .map((e) => ProcedureCard(procedure: e))
                           .toList())
                 ],

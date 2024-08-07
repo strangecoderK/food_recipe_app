@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:food_recipe_app/core/result.dart';
 import 'package:food_recipe_app/data/model/recipe.dart';
 import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository.dart';
+import 'package:food_recipe_app/presentation/main/saved_recipe/saved_recipe_state.dart';
 
 class SavedRecipeViewModel with ChangeNotifier {
   final SavedRecipeRepository repository;
-  bool _isLoading = false;
+  SavedRecipeState _state = const SavedRecipeState();
 
   SavedRecipeViewModel(this.repository) {
     fetchRecipes();
   }
 
-  List<Recipe> _recipes = [];
-
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
-
-  bool get isLoading => _isLoading;
+  SavedRecipeState get state => _state;
 
   void fetchRecipes() async {
-    _isLoading = true;
+    _state = state.copyWith(isLoading: true);
     notifyListeners();
 
     final result = await repository.getRecipes();
     switch (result) {
       case Success<List<Recipe>>():
-        _recipes = result.data;
-        _isLoading = false;
+        _state = state.copyWith(recipes: result.data, isLoading: false);
         notifyListeners();
       case Error<List<Recipe>>():
         print(result.e);

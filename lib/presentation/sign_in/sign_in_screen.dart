@@ -24,15 +24,15 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 30, top: 94),
+          const Padding(
+            padding: EdgeInsets.only(left: 30, top: 94),
             child: Text(
               'Hello,',
               style: TextStyles.headerTextBold,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, bottom: 32),
+          const Padding(
+            padding: EdgeInsets.only(left: 30, bottom: 32),
             child: Text(
               'Welcome Back!',
               style: TextStyles.largeTextRegular,

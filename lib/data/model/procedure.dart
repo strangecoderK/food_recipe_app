@@ -12,5 +12,6 @@ class Procedure with _$Procedure {
     required String content,
   }) = _Procedure;
 
-  factory Procedure.fromJson(Map<String, Object?> json) => _$ProcedureFromJson(json);
+  factory Procedure.fromJson(Map<String, Object?> json) =>
+      _$ProcedureFromJson(json);
 }

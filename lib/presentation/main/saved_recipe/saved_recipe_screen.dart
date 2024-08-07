@@ -10,27 +10,27 @@ class SavedRecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SavedRecipeViewModel>();
+    final state = viewModel.state;
     return Column(
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 70.0, bottom: 10),
+            padding: EdgeInsets.only(top: 70.0, bottom: 10),
             child: Text(
               'Saved recipes',
               style: TextStyles.mediumTextBold,
             ),
           ),
         ),
-        viewModel.isLoading
+        state.isLoading
             ? const Center(
                 child: CircularProgressIndicator(),
               )
             : Expanded(
                 child: ListView(
                   padding: EdgeInsets.zero,
-                  children: viewModel.recipes
-                      .map((e) => RecipeCard(recipe: e))
-                      .toList(),
+                  children:
+                      state.recipes.map((e) => RecipeCard(recipe: e)).toList(),
                 ),
               ),
       ],
