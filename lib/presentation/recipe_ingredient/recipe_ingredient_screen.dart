@@ -26,6 +26,11 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
   @override
   void initState() {
     super.initState();
+    Future.microtask(() async {
+      final RecipeIngredientViewModel viewModel =
+      context.read<RecipeIngredientViewModel>();
+      await viewModel.initProfile(widget.recipe);
+    });
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_handleTabSelection);
   }
@@ -131,7 +136,9 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
                   ),
                   const Spacer(),
                   Text(
-                    viewModel.currentTabText,
+                    viewModel.currentTabIndex == 0
+                        ? '${widget.recipe.ingredients.length} items'
+                        : '${state.procedureList.length} steps',
                     style: TextStyles.smallerTextRegular
                         .copyWith(color: ColorStyles.gray3),
                   ),

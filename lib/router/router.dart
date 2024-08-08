@@ -44,7 +44,7 @@ final router = GoRouter(
       builder: (context, state) {
         final recipe = state.extra as Recipe;
         return ChangeNotifierProvider<RecipeIngredientViewModel>(
-            create:(context)=> RecipeIngredientViewModel(recipe,
+            create: (context) => RecipeIngredientViewModel(
                 profileRepository:
                     ProfileRepositoryImpl(dataSource: MockProfileDataSource()),
                 recipeRepository: RecipeRepositoryImpl(
@@ -66,7 +66,7 @@ final router = GoRouter(
       path: '/search_screen',
       builder: (context, state) {
         return ChangeNotifierProvider<SearchViewModel>(
-            create:(context)=> SearchViewModel(
+            create: (context) => SearchViewModel(
                 repository: RecipeRepositoryImpl(
                     recipeDataSource: MockRecipeDataSource())),
             child: const SearchScreen());

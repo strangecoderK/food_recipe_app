@@ -11,43 +11,36 @@ import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
 import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_state.dart';
 
 class RecipeIngredientViewModel with ChangeNotifier {
-  final Recipe recipe;
   final RecipeRepository recipeRepository;
   final IngredientRepository ingredientRepository;
   final ProcedureRepository procedureRepository;
   final ProfileRepository profileRepository;
 
-  RecipeIngredientViewModel(
-    this.recipe, {
+  RecipeIngredientViewModel({
     required this.profileRepository,
     required this.recipeRepository,
     required this.ingredientRepository,
     required this.procedureRepository,
-  }) {
-    _initProfile();
-  }
+  });
 
   RecipeIngredientState _state = const RecipeIngredientState();
 
   RecipeIngredientState get state => _state;
 
-  Future<void> _initProfile() async {
-    await getProfile(recipe.chef);
-    await getProcedures(recipe.id);
-  }
-
   //추후 다른 방식으로 state에 분리해야 될 것으로 보임
-  Set<Profile> _followingSet = {};
 
   int _currentTabIndex = 0;
 
   int get currentTabIndex => _currentTabIndex;
 
-  String get currentTabText => _currentTabIndex == 0
-      ? '${recipe.ingredients.length} items'
-      : '${state.procedureList.length} steps';
+  Set<Profile> _followingSet = {};
 
   Set<Profile> get followingSet => _followingSet;
+
+  Future<void> initProfile(Recipe recipe) async {
+    await getProfile(recipe.chef);
+    await getProcedures(recipe.id);
+  }
 
   void updateTab(int index) {
     _currentTabIndex = index;
