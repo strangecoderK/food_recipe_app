@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/data/model/user.dart';
+import 'package:food_recipe_app/domain/model/user.dart';
 
 class HomeViewModel with ChangeNotifier {
   final User _user;

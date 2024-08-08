@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/core/result.dart';
-import 'package:food_recipe_app/data/model/recipe.dart';
-import 'package:food_recipe_app/data/repository/recipe/recipe_repository.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
+import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
 import 'package:food_recipe_app/presentation/search/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {

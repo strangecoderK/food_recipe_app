@@ -1,5 +1,5 @@
-import 'package:food_recipe_app/data/model/procedure.dart';
-import 'package:food_recipe_app/data/model/profile.dart';
+import 'package:food_recipe_app/domain/model/procedure.dart';
+import 'package:food_recipe_app/domain/model/profile.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'recipe_ingredient_state.freezed.dart';

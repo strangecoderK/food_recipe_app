@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
 
-import 'package:food_recipe_app/data/model/user.dart';
-import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository.dart';
+import 'package:food_recipe_app/domain/model/user.dart';
+import 'package:food_recipe_app/domain/repository/saved_recipe_repository.dart';
 import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository_impl.dart';
 
 import 'package:food_recipe_app/presentation/main/home/home_screen.dart';

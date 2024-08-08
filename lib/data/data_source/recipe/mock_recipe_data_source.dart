@@ -1,7 +1,7 @@
 import 'package:food_recipe_app/data/data_source/recipe/recipe_data_source.dart';
-import 'package:food_recipe_app/data/model/ingredient.dart';
-import 'package:food_recipe_app/data/model/recipe.dart';
-import 'package:food_recipe_app/data/model/recipe_ingredient.dart';
+import 'package:food_recipe_app/domain/model/ingredient.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
+import 'package:food_recipe_app/domain/model/recipe_ingredient.dart';
 
 class MockRecipeDataSource implements RecipeDataSource {
   final _data = [

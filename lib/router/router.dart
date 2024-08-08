@@ -3,7 +3,7 @@ import 'package:food_recipe_app/data/data_source/procedure/mock_procedure_data_s
 import 'package:food_recipe_app/data/data_source/profile/mock_profile_data_source.dart';
 import 'package:food_recipe_app/data/data_source/recipe/mock_recipe_data_source.dart';
 import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
-import 'package:food_recipe_app/data/model/recipe.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
 import 'package:food_recipe_app/data/repository/ingredient/ingredient_repository_impl.dart';
 import 'package:food_recipe_app/data/repository/procedure/procedure_repository_impl.dart';
 import 'package:food_recipe_app/data/repository/profile/profile_repository_impl.dart';

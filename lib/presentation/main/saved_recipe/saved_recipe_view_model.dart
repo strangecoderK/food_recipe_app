@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/core/result.dart';
-import 'package:food_recipe_app/data/model/recipe.dart';
-import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
+import 'package:food_recipe_app/domain/repository/saved_recipe_repository.dart';
 import 'package:food_recipe_app/presentation/main/saved_recipe/saved_recipe_state.dart';
 
 class SavedRecipeViewModel with ChangeNotifier {

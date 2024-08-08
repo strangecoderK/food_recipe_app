@@ -1,7 +1,7 @@
 import 'package:food_recipe_app/core/result.dart';
 import 'package:food_recipe_app/data/data_source/ingredient/ingredient_data_source.dart';
-import 'package:food_recipe_app/data/model/ingredient.dart';
-import 'package:food_recipe_app/data/repository/ingredient/ingredient_repository.dart';
+import 'package:food_recipe_app/domain/model/ingredient.dart';
+import 'package:food_recipe_app/domain/repository/ingredient_repository.dart';
 
 class IngredientRepositoryImpl implements IngredientRepository {
   final IngredientDataSource datasource;

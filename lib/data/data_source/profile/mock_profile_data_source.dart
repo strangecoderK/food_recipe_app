@@ -1,5 +1,5 @@
 import 'package:food_recipe_app/data/data_source/profile/profile_data_source.dart';
-import 'package:food_recipe_app/data/model/profile.dart';
+import 'package:food_recipe_app/domain/model/profile.dart';
 
 class MockProfileDataSource implements ProfileDataSource {
   final List<Profile> _data = [

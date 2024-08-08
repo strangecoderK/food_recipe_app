@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/core/result.dart';
-import 'package:food_recipe_app/data/model/procedure.dart';
-import 'package:food_recipe_app/data/model/profile.dart';
-import 'package:food_recipe_app/data/model/recipe.dart';
-import 'package:food_recipe_app/data/repository/ingredient/ingredient_repository.dart';
-import 'package:food_recipe_app/data/repository/procedure/procedure_repository.dart';
-import 'package:food_recipe_app/data/repository/profile/profile_repository.dart';
-import 'package:food_recipe_app/data/repository/recipe/recipe_repository.dart';
+import 'package:food_recipe_app/domain/model/procedure.dart';
+import 'package:food_recipe_app/domain/model/profile.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
+import 'package:food_recipe_app/domain/repository/ingredient_repository.dart';
+import 'package:food_recipe_app/domain/repository/procedure_repository.dart';
+import 'package:food_recipe_app/domain/repository/profile_repository.dart';
+import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
 import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_state.dart';
 
 class RecipeIngredientViewModel with ChangeNotifier {
