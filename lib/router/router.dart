@@ -9,6 +9,9 @@ import 'package:food_recipe_app/data/repository/procedure/procedure_repository_i
 import 'package:food_recipe_app/data/repository/profile/profile_repository_impl.dart';
 import 'package:food_recipe_app/data/repository/recipe/recipe_repository_impl.dart';
 import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository_impl.dart';
+import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
+import 'package:food_recipe_app/domain/use_case/get_recipes_use_case.dart';
+import 'package:food_recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:food_recipe_app/presentation/main/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:food_recipe_app/presentation/recipe_ingredient/recipe_ingredient_screen.dart';
@@ -67,8 +70,12 @@ final router = GoRouter(
       builder: (context, state) {
         return ChangeNotifierProvider<SearchViewModel>(
             create: (context) => SearchViewModel(
-                repository: RecipeRepositoryImpl(
-                    recipeDataSource: MockRecipeDataSource())),
+                getRecipesUseCase: GetRecipesUseCase(
+                    repository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSource())),
+                searchRecipeUseCase: SearchRecipeUseCase(
+                    repository: RecipeRepositoryImpl(
+                        recipeDataSource: MockRecipeDataSource()))),
             child: const SearchScreen());
       },
     ),

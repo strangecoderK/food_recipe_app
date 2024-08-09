@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/core/result.dart';
 import 'package:food_recipe_app/domain/model/recipe.dart';
-import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
+import 'package:food_recipe_app/domain/use_case/get_recipes_use_case.dart';
+import 'package:food_recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:food_recipe_app/presentation/search/search_state.dart';
 
 class SearchViewModel with ChangeNotifier {
-  final RecipeRepository repository;
+  final GetRecipesUseCase getRecipesUseCase;
+  final SearchRecipeUseCase searchRecipeUseCase;
 
   SearchViewModel({
-    required this.repository,
+    required this.getRecipesUseCase,
+    required this.searchRecipeUseCase,
   }) {
     fetchRecipes();
   }
@@ -21,28 +24,24 @@ class SearchViewModel with ChangeNotifier {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
 
-    final result = await repository.getRecipes();
+    final result = await getRecipesUseCase.execute();
     switch (result) {
       case Success<List<Recipe>>():
-        _state = state.copyWith(recipes: result.data, isLoading: false);
+        _state = state.copyWith(isLoading: false, recipes: result.data);
         notifyListeners();
       case Error<List<Recipe>>():
-        print(result.e);
+      // TODO: Handle this case.
     }
   }
 
   void search(String value) async {
-    final result = await repository.getRecipes();
+    final result = await searchRecipeUseCase.execute(value);
     switch (result) {
       case Success<List<Recipe>>():
-        _state = state.copyWith(
-            recipes: result.data
-                .where(
-                    (e) => e.name.toLowerCase().contains(value.toLowerCase()))
-                .toList());
+        _state = state.copyWith(recipes: result.data);
         notifyListeners();
       case Error<List<Recipe>>():
-        print(result.e);
+      // TODO: Handle this case.
     }
   }
 }
