@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/data/data_source/saved_recipe/mock_saved_recipe_data_source.dart';
-
-import 'package:food_recipe_app/domain/model/user.dart';
-import 'package:food_recipe_app/domain/repository/saved_recipe_repository.dart';
-import 'package:food_recipe_app/data/repository/saved_recipe/saved_recipe_repository_impl.dart';
+import 'package:food_recipe_app/di/di_setup.dart';
 
 import 'package:food_recipe_app/presentation/main/home/home_screen.dart';
 import 'package:food_recipe_app/presentation/main/home/home_view_model.dart';
@@ -14,9 +10,7 @@ import 'package:food_recipe_app/presentation/main/saved_recipe/saved_recipe_view
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
-  final SavedRecipeRepository repository;
-
-  const MainScreen({super.key, required this.repository});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -27,13 +21,6 @@ class _MainScreenState extends State<MainScreen> {
   late final List<Widget> _screen;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysHide;
-
-  final User user = const User(
-      id: 1,
-      name: 'StrangeCoder',
-      email: 'dh90502@gmail.com',
-      image:
-          'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png');
 
   final destination = [
     NavigationDestination(
@@ -61,11 +48,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     _screen = [
       ChangeNotifierProvider<HomeViewModel>(
-          create: (context) => HomeViewModel(user), child: const HomeScreen()),
+          create: (context) => getIt(), child: const HomeScreen()),
       ChangeNotifierProvider<SavedRecipeViewModel>(
-          create: (context) => SavedRecipeViewModel(SavedRecipeRepositoryImpl(
-              recipeDataSource: MockSavedRecipeDataSource())),
-          child: const SavedRecipeScreen()),
+          create: (context) => getIt(), child: const SavedRecipeScreen()),
       const NotificationScreen(),
       const ProfileScreen(),
     ];

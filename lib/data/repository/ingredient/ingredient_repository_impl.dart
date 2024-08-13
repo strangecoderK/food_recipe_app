@@ -4,16 +4,16 @@ import 'package:food_recipe_app/domain/model/ingredient.dart';
 import 'package:food_recipe_app/domain/repository/ingredient_repository.dart';
 
 class IngredientRepositoryImpl implements IngredientRepository {
-  final IngredientDataSource datasource;
+  final IngredientDataSource _dataSource;
 
   const IngredientRepositoryImpl({
-    required this.datasource,
-  });
+    required IngredientDataSource datasource,
+  }) : _dataSource = datasource;
 
   @override
   Future<Result<List<Ingredient>>> getIngredient() async {
     try {
-      final result = await datasource.getIngredients();
+      final result = await _dataSource.getIngredients();
       return Result.success(result);
     } catch (e) {
       return const Result.error('로드에 실패했습니다.');
