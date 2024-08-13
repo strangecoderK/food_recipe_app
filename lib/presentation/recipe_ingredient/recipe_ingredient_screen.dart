@@ -28,7 +28,7 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
     super.initState();
     Future.microtask(() async {
       final RecipeIngredientViewModel viewModel =
-      context.read<RecipeIngredientViewModel>();
+          context.read<RecipeIngredientViewModel>();
       await viewModel.initProfile(widget.recipe);
     });
     _tabController = TabController(length: 2, vsync: this);

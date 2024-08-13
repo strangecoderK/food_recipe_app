@@ -13,6 +13,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       chef: 'Chef John',
       time: '20 min',
       rating: 4.0,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -60,6 +61,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       chef: 'Mark Kelvin',
       time: '20 min',
       rating: 4.0,
+      category: 'Chinese',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -88,6 +90,15 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 5,
         ),
+        RecipeIngredient(
+          ingredient: Ingredient(
+            id: 3,
+            name: 'Pork',
+            image:
+                'https://cdn.pixabay.com/photo/2019/12/20/14/44/meat-4708596_1280.jpg',
+          ),
+          amount: 500,
+        ),
       ],
     ),
     const Recipe(
@@ -98,11 +109,12 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       chef: 'Spicy Nelly',
       time: '20 min',
       rating: 4.0,
+      category: 'Indian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
             id: 6,
-            name: 'Chicken',
+            name: 'Asian',
             image:
                 'https://cdn.pixabay.com/photo/2010/12/10/08/chicken-1140_1280.jpg',
           ),
@@ -136,6 +148,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       chef: 'Kim Dahee',
       time: '30 min',
       rating: 5.0,
+      category: 'Asian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(

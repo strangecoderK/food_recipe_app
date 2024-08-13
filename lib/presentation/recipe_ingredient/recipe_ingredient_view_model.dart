@@ -27,7 +27,6 @@ class RecipeIngredientViewModel with ChangeNotifier {
 
   RecipeIngredientState get state => _state;
 
-  //추후 다른 방식으로 state에 분리해야 될 것으로 보임
 
   int _currentTabIndex = 0;
 

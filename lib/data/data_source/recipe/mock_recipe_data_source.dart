@@ -13,6 +13,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Chef John',
       time: '20 min',
       rating: 4.0,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -40,12 +41,13 @@ class MockRecipeDataSource implements RecipeDataSource {
                 'https://cdn.pixabay.com/photo/2016/03/05/22/31/pepper-1239308_1280.jpg',
           ),
           amount: 10,
-        ),  RecipeIngredient(
+        ),
+        RecipeIngredient(
           ingredient: Ingredient(
             id: 1,
             name: 'Tomato',
             image:
-            'https://cdn.pixabay.com/photo/2017/10/06/17/17/tomato-2823826_1280.jpg',
+                'https://cdn.pixabay.com/photo/2017/10/06/17/17/tomato-2823826_1280.jpg',
           ),
           amount: 100,
         ),
@@ -59,6 +61,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Mark Kelvin',
       time: '20 min',
       rating: 4.0,
+      category: 'Chinese',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -86,12 +89,13 @@ class MockRecipeDataSource implements RecipeDataSource {
                 'https://cdn.pixabay.com/photo/2016/03/05/22/31/pepper-1239308_1280.jpg',
           ),
           amount: 5,
-        ),  RecipeIngredient(
+        ),
+        RecipeIngredient(
           ingredient: Ingredient(
             id: 3,
             name: 'Pork',
             image:
-            'https://cdn.pixabay.com/photo/2019/12/20/14/44/meat-4708596_1280.jpg',
+                'https://cdn.pixabay.com/photo/2019/12/20/14/44/meat-4708596_1280.jpg',
           ),
           amount: 500,
         ),
@@ -105,11 +109,12 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Spicy Nelly',
       time: '20 min',
       rating: 4.0,
+      category: 'Indian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
             id: 6,
-            name: 'Chicken',
+            name: 'Asian',
             image:
                 'https://cdn.pixabay.com/photo/2010/12/10/08/chicken-1140_1280.jpg',
           ),
@@ -143,7 +148,18 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Kim Dahee',
       time: '30 min',
       rating: 5.0,
-      ingredients: [],
+      category: 'Asian',
+      ingredients: [
+        RecipeIngredient(
+          ingredient: Ingredient(
+            id: 7,
+            name: 'Sugar',
+            image:
+                'https://cdn.pixabay.com/photo/2014/11/28/19/10/lump-sugar-549096_1280.jpg',
+          ),
+          amount: 100,
+        ),
+      ],
     ),
     const Recipe(
       id: 5,
@@ -153,6 +169,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Alice Johnson',
       time: '25 min',
       rating: 4.5,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -182,6 +199,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Gordon Ramsay',
       time: '45 min',
       rating: 5.0,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -211,6 +229,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Mario Batali',
       time: '15 min',
       rating: 4.3,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -231,6 +250,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Jiro Ono',
       time: '60 min',
       rating: 4.8,
+      category: 'Asian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -260,6 +280,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Julia Child',
       time: '40 min',
       rating: 4.6,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(
@@ -280,6 +301,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       chef: 'Paul Hollywood',
       time: '30 min',
       rating: 4.9,
+      category: 'Italian',
       ingredients: [
         RecipeIngredient(
           ingredient: Ingredient(

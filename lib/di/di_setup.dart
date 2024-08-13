@@ -52,12 +52,14 @@ void diSetup() {
   getIt.registerSingleton<SearchRecipeUseCase>(
       SearchRecipeUseCase(repository: getIt()));
 
-  getIt.registerFactory(() => HomeViewModel(const User(
-      id: 1,
-      name: 'StrangeCoder',
-      email: 'dh90502@gmail.com',
-      image:
-          'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png')));
+  getIt.registerFactory(() => HomeViewModel(
+      user: const User(
+          id: 1,
+          name: 'StrangeCoder',
+          email: 'dh90502@gmail.com',
+          image:
+              'https://cdn.pixabay.com/photo/2022/10/19/01/02/woman-7531315_1280.png'),
+      getRecipesUseCase: getIt()));
   getIt.registerFactory(() => SavedRecipeViewModel(getIt()));
   getIt.registerFactory(() => RecipeIngredientViewModel(
       profileRepository: getIt(),
