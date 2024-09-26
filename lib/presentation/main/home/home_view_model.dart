@@ -36,6 +36,37 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  // Future<void> getRecipes() async {
+  //   final result = await _getRecipesUseCase.execute();
+  //   switch (result) {
+  //     case Success<List<Recipe>>():
+  //       _state = state.copyWith(recipes: result.data);
+  //       notifyListeners();
+  //     case Error<List<Recipe>>():
+  //     // TODO: Handle this case.
+  //   }
+  // }
+
+  Future<void> getSelectedRecipes(String value) async {
+    final result = await _getRecipesUseCase.execute();
+    switch (result) {
+      case Success<List<Recipe>>():
+        if (state.selectedCategory == 'All') {
+          _state = state.copyWith(selectedRecipes: result.data);
+          notifyListeners();
+        } else {
+          _state = state.copyWith(
+              selectedRecipes: result.data
+                  .where((e) => e.category == state.selectedCategory)
+                  .toList());
+          notifyListeners();
+        }
+
+      case Error<List<Recipe>>():
+      // TODO: Handle this case.
+    }
+  }
+
   Future<void> getCategories() async {
     final result = await _getRecipesUseCase.execute();
     switch (result) {
@@ -52,6 +83,7 @@ class HomeViewModel with ChangeNotifier {
     _state = state.copyWith(
         selectedCategory: index == 0 ? 'All' : _state.categories[index - 1]);
     onSelectedCategory(state.selectedCategory);
+    notifyListeners();
   }
 
   void onSelectedCategory(String category) async {

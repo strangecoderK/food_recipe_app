@@ -26,7 +26,7 @@ class CategoryTabBar extends StatelessWidget {
         tabs: [
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('all'),
+            child: Text('All'),
           ),
           ..._categories.map((e) => Padding(
                 padding: const EdgeInsets.all(8.0),

@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/domain/model/ingredient.dart';
+import 'package:food_recipe_app/domain/model/recipe.dart';
+import 'package:food_recipe_app/domain/model/recipe_ingredient.dart';
 import 'package:food_recipe_app/presentation/component/category_tab_bar.dart';
+import 'package:food_recipe_app/presentation/component/home_recipe_card.dart';
 import 'package:food_recipe_app/presentation/component/small_box.dart';
 import 'package:food_recipe_app/presentation/main/home/home_view_model.dart';
 import 'package:food_recipe_app/presentation/search/component/text_field_for_move.dart';
@@ -29,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final viewModel = context.read<HomeViewModel>();
       _loadCategories();
+
       _subscription = viewModel.eventStream.listen((event) {
         switch (event) {
           case ShowCategory():
@@ -43,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   Future<void> _loadCategories() async {
     final viewModel = context.read<HomeViewModel>();
+    final state = viewModel.state;
     await viewModel.getCategories();
+    await viewModel.getSelectedRecipes(state.selectedCategory);
     _initTabController();
   }
 
@@ -78,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
     final state = viewModel.state;
+
     return Column(
       children: [
         Padding(
@@ -111,8 +119,27 @@ class _HomeScreenState extends State<HomeScreen>
             : CategoryTabBar(
                 tabController: _tabController,
                 categories: state.categories,
-                callBack: viewModel.selectCategory,
+                callBack: (index) {
+                  viewModel.selectCategory(index);
+                  viewModel.getSelectedRecipes(state.selectedCategory);
+                },
               ),
+        // HomeRecipeCard(recipe: recipe)
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 22.5, right: 22.5),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final recipes = state.selectedRecipes;
+                return HomeRecipeCard(recipe: recipes[index]);
+              },
+              itemCount: state.selectedRecipes.length,
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
+        ),
+        // Expanded(
+        //      child: Container(color: Colors.red,))
       ],
     );
   }
