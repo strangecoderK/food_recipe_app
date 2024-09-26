@@ -53,117 +53,175 @@ class _RecipeIngredientScreenState extends State<RecipeIngredientScreen>
   Widget build(BuildContext context) {
     final viewModel = context.watch<RecipeIngredientViewModel>();
     final state = viewModel.state;
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 54.0,
-                left: 20.0,
-                right: 24.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () => context.pop(),
-                    icon: const Icon(Icons.arrow_back),
-                    padding: EdgeInsets.zero,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.more_horiz),
-                    padding: EdgeInsets.zero,
-                  )
-                ],
-              ),
+    return Scaffold(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 54.0,
+              left: 20.0,
+              right: 24.0,
             ),
-            RecipePicture(recipe: widget.recipe),
-            if (state.chef != null)
-              ChefProfile(
-                profile: state.chef!,
-                onTap: (profile) {
-                  viewModel.changeFollow(profile);
-                },
-                isFollowing: viewModel.followingSet.contains(state.chef),
-              )
-            else
-              const CircularProgressIndicator(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TabBar(
-                controller: _tabController,
-                tabs: const [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
-                    child:
-                        Text('Ingredient', style: TextStyles.smallerTextBold),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
-                    child: Text('Procedure', style: TextStyles.smallerTextBold),
-                  ),
-                ],
-                // TabBar 스타일 지정
-                labelColor: ColorStyles.white,
-                unselectedLabelColor: ColorStyles.primary100,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicator: BoxDecoration(
-                  color: ColorStyles.primary100, // 선택된 탭 배경색
-                  borderRadius: BorderRadius.circular(15),
-                  // 선택된 탭 모서리 둥글게
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () => context.pop(),
+                  icon: const Icon(Icons.arrow_back),
+                  padding: EdgeInsets.zero,
                 ),
-                dividerColor: Colors.transparent,
-              ),
+                PopupMenuButton(
+                    color: Colors.white,
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(
+                          onTap: () {
+                            viewModel.showCustomDialog(
+                                context, widget.recipe.image);
+                          },
+                          value: widget.recipe.image,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Image.asset(
+                                  'assets/images/share.png',
+                                  width: 20,
+                                ),
+                              ),
+                              const Text('share'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Image.asset(
+                                  'assets/images/star.png',
+                                  width: 20,
+                                ),
+                              ),
+                              const Text('Rate Recipe'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Image.asset(
+                                  'assets/images/review.png',
+                                  width: 20,
+                                ),
+                              ),
+                              const Text('Review'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Image.asset(
+                                  'assets/images/unsave.png',
+                                  width: 20,
+                                ),
+                              ),
+                              const Text('Unsave'),
+                            ],
+                          ),
+                        ),
+                      ];
+                    })
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 30.0, right: 30.0, bottom: 15.0, top: 14.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/images/dish_icon.png',
-                    width: 17,
-                  ),
-                  Text(
-                    '1 serve',
-                    style: TextStyles.smallerTextRegular
-                        .copyWith(color: ColorStyles.gray3),
-                  ),
-                  const Spacer(),
-                  Text(
-                    viewModel.currentTabIndex == 0
-                        ? '${widget.recipe.ingredients.length} items'
-                        : '${state.procedureList.length} steps',
-                    style: TextStyles.smallerTextRegular
-                        .copyWith(color: ColorStyles.gray3),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  ListView(
-                      padding: EdgeInsets.zero,
-                      children: widget.recipe.ingredients
-                          .map((e) => IngredientCard(recipeIngredient: e))
-                          .toList()),
-                  ListView(
-                      padding: EdgeInsets.zero,
-                      children: state.procedureList
-                          .map((e) => ProcedureCard(procedure: e))
-                          .toList())
-                ],
-              ),
+          ),
+          RecipePicture(recipe: widget.recipe),
+          if (state.chef != null)
+            ChefProfile(
+              profile: state.chef!,
+              onTap: (profile) {
+                viewModel.changeFollow(profile);
+              },
+              isFollowing: viewModel.followingSet.contains(state.chef),
             )
-          ],
-        ),
+          else
+            const CircularProgressIndicator(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabBar(
+              controller: _tabController,
+              tabs: const [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
+                  child: Text('Ingredient', style: TextStyles.smallerTextBold),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 13.0, bottom: 13.0, right: 45.0, left: 45.0),
+                  child: Text('Procedure', style: TextStyles.smallerTextBold),
+                ),
+              ],
+              // TabBar 스타일 지정
+              labelColor: ColorStyles.white,
+              unselectedLabelColor: ColorStyles.primary100,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: BoxDecoration(
+                color: ColorStyles.primary100, // 선택된 탭 배경색
+                borderRadius: BorderRadius.circular(15),
+                // 선택된 탭 모서리 둥글게
+              ),
+              dividerColor: Colors.transparent,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 30.0, right: 30.0, bottom: 15.0, top: 14.0),
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/images/dish_icon.png',
+                  width: 17,
+                ),
+                Text(
+                  '1 serve',
+                  style: TextStyles.smallerTextRegular
+                      .copyWith(color: ColorStyles.gray3),
+                ),
+                const Spacer(),
+                Text(
+                  viewModel.currentTabIndex == 0
+                      ? '${widget.recipe.ingredients.length} items'
+                      : '${state.procedureList.length} steps',
+                  style: TextStyles.smallerTextRegular
+                      .copyWith(color: ColorStyles.gray3),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                ListView(
+                    padding: EdgeInsets.zero,
+                    children: widget.recipe.ingredients
+                        .map((e) => IngredientCard(recipeIngredient: e))
+                        .toList()),
+                ListView(
+                    padding: EdgeInsets.zero,
+                    children: state.procedureList
+                        .map((e) => ProcedureCard(procedure: e))
+                        .toList())
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

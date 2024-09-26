@@ -19,6 +19,7 @@ import 'package:food_recipe_app/domain/repository/procedure_repository.dart';
 import 'package:food_recipe_app/domain/repository/profile_repository.dart';
 import 'package:food_recipe_app/domain/repository/recipe_repository.dart';
 import 'package:food_recipe_app/domain/repository/saved_recipe_repository.dart';
+import 'package:food_recipe_app/domain/use_case/copy_link_use_case.dart';
 import 'package:food_recipe_app/domain/use_case/get_recipes_use_case.dart';
 import 'package:food_recipe_app/domain/use_case/search_recipe_use_case.dart';
 import 'package:food_recipe_app/presentation/main/home/home_view_model.dart';
@@ -51,6 +52,7 @@ void diSetup() {
       GetRecipesUseCase(repository: getIt()));
   getIt.registerSingleton<SearchRecipeUseCase>(
       SearchRecipeUseCase(repository: getIt()));
+  getIt.registerSingleton<CopyLinkUseCase>(CopyLinkUseCase());
 
   getIt.registerFactory(() => HomeViewModel(
       user: const User(
@@ -62,9 +64,9 @@ void diSetup() {
       getRecipesUseCase: getIt()));
   getIt.registerFactory(() => SavedRecipeViewModel(getIt()));
   getIt.registerFactory(() => RecipeIngredientViewModel(
+      copyLinkUseCase: getIt(),
       profileRepository: getIt(),
       recipeRepository: getIt(),
-      ingredientRepository: getIt(),
       procedureRepository: getIt()));
   getIt.registerFactory(() => SearchViewModel(
       getRecipesUseCase: getIt(), searchRecipeUseCase: getIt()));
