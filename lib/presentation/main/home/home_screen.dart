@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
       _subscription = viewModel.eventStream.listen((event) {
         switch (event) {
           case ShowCategory():
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(viewModel.state.selectedCategory),
               duration: const Duration(milliseconds: 1000),
