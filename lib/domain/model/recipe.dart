@@ -16,6 +16,7 @@ class Recipe with _$Recipe {
     required num rating,
     required List<RecipeIngredient> ingredients,
     required String category,
+    required DateTime createdAt,
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, Object?> json) => _$RecipeFromJson(json);

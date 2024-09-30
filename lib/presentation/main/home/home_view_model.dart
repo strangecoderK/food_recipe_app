@@ -36,16 +36,22 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> getRecipes() async {
-  //   final result = await _getRecipesUseCase.execute();
-  //   switch (result) {
-  //     case Success<List<Recipe>>():
-  //       _state = state.copyWith(recipes: result.data);
-  //       notifyListeners();
-  //     case Error<List<Recipe>>():
-  //     // TODO: Handle this case.
-  //   }
-  // }
+  Future<void> getNewRecipes() async {
+    final result = await _getRecipesUseCase.execute();
+    final today = DateTime.now();
+    switch (result) {
+      case Success<List<Recipe>>():
+        _state = state.copyWith(
+            newRecipes: result.data.where((e) {
+          return e.createdAt.isAfter(today.subtract(Duration(days: 30))) &&
+              e.createdAt.isBefore(today.add(Duration(days: 1)));
+        }).toList());
+        notifyListeners();
+      case Error<List<Recipe>>():
+        _state = state.copyWith(newRecipes: []);
+        notifyListeners();
+    }
+  }
 
   Future<void> getSelectedRecipes(String value) async {
     final result = await _getRecipesUseCase.execute();

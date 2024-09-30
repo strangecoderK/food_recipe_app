@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:food_recipe_app/domain/model/ingredient.dart';
-import 'package:food_recipe_app/domain/model/recipe.dart';
-import 'package:food_recipe_app/domain/model/recipe_ingredient.dart';
 import 'package:food_recipe_app/presentation/component/category_tab_bar.dart';
 import 'package:food_recipe_app/presentation/component/home_recipe_card.dart';
+import 'package:food_recipe_app/presentation/component/new_recipe_card.dart';
 import 'package:food_recipe_app/presentation/component/small_box.dart';
 import 'package:food_recipe_app/presentation/main/home/home_view_model.dart';
 import 'package:food_recipe_app/presentation/search/component/text_field_for_move.dart';
 import 'package:food_recipe_app/ui/color_styles.dart';
 import 'package:food_recipe_app/ui/search_category_event.dart';
 import 'package:food_recipe_app/ui/text_styles.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
     final state = viewModel.state;
     await viewModel.getCategories();
     await viewModel.getSelectedRecipes(state.selectedCategory);
+    await viewModel.getNewRecipes();
     _initTabController();
   }
 
@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
     final state = viewModel.state;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(
@@ -125,21 +126,54 @@ class _HomeScreenState extends State<HomeScreen>
                 },
               ),
         // HomeRecipeCard(recipe: recipe)
-        Flexible(
+        SizedBox(
+          height: 250,
           child: Padding(
             padding: const EdgeInsets.only(left: 22.5, right: 22.5),
             child: ListView.builder(
               itemBuilder: (context, index) {
                 final recipes = state.selectedRecipes;
-                return HomeRecipeCard(recipe: recipes[index]);
+                return HomeRecipeCard(
+                  recipe: recipes[index],
+                  onTap: () {
+                    context.push('/recipe_ingredient_screen',
+                        extra: recipes[index]);
+                  },
+                );
               },
               itemCount: state.selectedRecipes.length,
               scrollDirection: Axis.horizontal,
             ),
           ),
         ),
-        // Expanded(
-        //      child: Container(color: Colors.red,))
+        const Padding(
+          padding:
+              EdgeInsets.only(left: 30.0, right: 30.0, top: 15.0, bottom: 15.0),
+          child: Text(
+            'New Recipes',
+            style: TextStyles.normalTextBold,
+          ),
+        ),
+        SizedBox(
+          height: 155,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 22.5, right: 22.5),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final recipes = state.newRecipes;
+                return NewRecipeCard(
+                  recipe: recipes[index],
+                  onTap: () {
+                    context.push('/recipe_ingredient_screen',
+                        extra: recipes[index]);
+                  },
+                );
+              },
+              itemCount: state.newRecipes.length,
+              scrollDirection: Axis.horizontal,
+            ),
+          ),
+        ),
       ],
     );
   }

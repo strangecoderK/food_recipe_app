@@ -5,7 +5,7 @@ import 'package:food_recipe_app/domain/model/recipe_ingredient.dart';
 
 class MockSavedRecipeDataSource implements SavedRecipeDataSource {
   final _data = [
-    const Recipe(
+    Recipe(
       id: 1,
       name: 'Traditional spare ribs baked',
       image:
@@ -15,7 +15,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       rating: 4.0,
       category: 'Italian',
       ingredients: [
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 3,
             name: 'Pork',
@@ -24,7 +24,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 500,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 9,
             name: 'Onion',
@@ -33,7 +33,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 50,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 8,
             name: 'Pepper',
@@ -42,7 +42,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 10,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 1,
             name: 'Tomato',
@@ -52,8 +52,9 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 2,
       name: 'Spice roasted chicken with flavored rice',
       image:
@@ -63,7 +64,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       rating: 4.0,
       category: 'Chinese',
       ingredients: [
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 6,
             name: 'Chicken',
@@ -72,7 +73,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 300,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 4,
             name: 'Rice',
@@ -81,7 +82,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 200,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 8,
             name: 'Pepper',
@@ -90,7 +91,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 5,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 3,
             name: 'Pork',
@@ -100,8 +101,9 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           amount: 500,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 3,
       name: 'Spicy fried rice mix chicken bali',
       image:
@@ -111,7 +113,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       rating: 4.0,
       category: 'Indian',
       ingredients: [
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 6,
             name: 'Asian',
@@ -120,7 +122,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 200,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 4,
             name: 'Rice',
@@ -129,7 +131,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           ),
           amount: 150,
         ),
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 1,
             name: 'Tomato',
@@ -139,8 +141,9 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
-    const Recipe(
+    Recipe(
       id: 4,
       name: 'Ttekbokki',
       image:
@@ -150,7 +153,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
       rating: 5.0,
       category: 'Asian',
       ingredients: [
-        RecipeIngredient(
+        const RecipeIngredient(
           ingredient: Ingredient(
             id: 7,
             name: 'Sugar',
@@ -160,6 +163,7 @@ class MockSavedRecipeDataSource implements SavedRecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
   ];
 

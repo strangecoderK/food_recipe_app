@@ -5,7 +5,7 @@ import 'package:food_recipe_app/domain/model/recipe_ingredient.dart';
 
 class MockRecipeDataSource implements RecipeDataSource {
   final _data = [
-    const Recipe(
+    Recipe(
       id: 1,
       name: 'Traditional spare ribs baked',
       image:
@@ -14,7 +14,7 @@ class MockRecipeDataSource implements RecipeDataSource {
       time: '20 min',
       rating: 4.0,
       category: 'Italian',
-      ingredients: [
+      ingredients: const [
         RecipeIngredient(
           ingredient: Ingredient(
             id: 3,
@@ -52,8 +52,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 2,
       name: 'Spice roasted chicken with flavored rice',
       image:
@@ -100,8 +101,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 500,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 3,
       name: 'Spicy fried rice mix chicken bali',
       image:
@@ -139,8 +141,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
-    const Recipe(
+    Recipe(
       id: 4,
       name: 'Ttekbokki',
       image:
@@ -160,8 +163,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 5,
       name: 'Grilled salmon with avocado salsa',
       image:
@@ -190,8 +194,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 5,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 6,
       name: 'Beef Wellington',
       image:
@@ -220,8 +225,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 9, 25),
     ),
-    const Recipe(
+    Recipe(
       id: 7,
       name: 'Classic Margherita Pizza',
       image:
@@ -241,8 +247,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 200,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
-    const Recipe(
+    Recipe(
       id: 8,
       name: 'Sushi Platter',
       image:
@@ -271,8 +278,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
-    const Recipe(
+    Recipe(
       id: 9,
       name: 'French Onion Soup',
       image:
@@ -292,8 +300,9 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 300,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
-    const Recipe(
+    Recipe(
       id: 10,
       name: 'Chocolate Lava Cake',
       image:
@@ -313,6 +322,7 @@ class MockRecipeDataSource implements RecipeDataSource {
           amount: 100,
         ),
       ],
+      createdAt: DateTime(2024, 8, 1),
     ),
   ];
 

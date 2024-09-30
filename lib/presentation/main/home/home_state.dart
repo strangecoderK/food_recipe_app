@@ -11,6 +11,7 @@ class HomeState with _$HomeState {
     @Default([]) List<String> categories,
     @Default([]) List<Recipe> recipes,
     @Default([]) List<Recipe> selectedRecipes,
+    @Default([]) List<Recipe> newRecipes,
     @Default(true) bool isLoading,
     @Default('All') String selectedCategory,
   }) = _HomeState;
